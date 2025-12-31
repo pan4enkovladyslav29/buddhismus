@@ -1,0 +1,78 @@
+body {
+  padding-top: 100px;
+}
+
+.navbar-dropdown {
+  min-height: 100px;
+  background: rgba(246, 251, 255, 1);
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.navbar-caption {
+  font-weight: 500;
+  color: #000;
+  text-decoration: none;
+}
+
+.nav-dropdown .link {
+  padding: 0 0.3em;
+  margin: 0.667em 1em;
+  color: #000 !important;
+}
+
+.navbar-nav {
+  align-items: center;
+}
+
+.icons-menu {
+  display: flex;
+  padding: 0 1rem;
+}
+
+.iconfont-wrapper {
+  font-size: 1.5rem;
+  color: #000;
+  margin: 0 0.25rem;
+}
+
+.navbar-buttons .btn {
+  margin-left: 1rem;
+}
+
+.hamburger {
+  width: 31px;
+  height: 20px;
+  position: relative;
+}
+
+.hamburger span {
+  position: absolute;
+  width: 30px;
+  height: 2px;
+  background: #000;
+  transition: 0.25s;
+}
+
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2),
+.hamburger span:nth-child(3) { top: 8px; }
+.hamburger span:nth-child(4) { top: 16px; }
+
+.navbar-toggler {
+  border: none;
+}
+
+@media (max-width: 991px) {
+  .navbar-nav {
+    text-align: center;
+  }
+  .icons-menu {
+    justify-content: center;
+    padding: 0.5rem 0;
+  }
+  .navbar-buttons {
+    text-align: center;
+    padding-bottom: 1rem;
+  }
+}
