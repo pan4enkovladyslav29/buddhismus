@@ -20,11 +20,11 @@
       --text-soft: #c3c0b8;
       --text-muted: #8b8890;
 
-      --accent: #e24d3f;       /* тёплый красно-оранжевый, как на скрине */
+      --accent: #e24d3f;
       --accent-soft: #f08b5c;
       --accent-dark: #b3362c;
 
-      --accent-gold: #d7b168;  /* буддийский золотой */
+      --accent-gold: #d7b168;
       --link-hover: #f4c47a;
 
       --radius-lg: 18px;
@@ -347,6 +347,7 @@
       display: flex;
       align-items: baseline;
       gap: 0.4rem;
+      flex-wrap: wrap;
     }
 
     section h3 span.section-tag {
@@ -790,6 +791,27 @@
       <label><input type="radio" name="q3" value="a">Reichtum und Macht</label>
     </div>
 
+    <div class="question" data-question="q4">
+      <p>4. Was ist das Dharma-Rad?</p>
+      <label><input type="radio" name="q4" value="a">Ein Symbol für Reichtum</label>
+      <label><input type="radio" name="q4" value="b">Ein Schmuckstück der Mönche</label>
+      <label><input type="radio" name="q4" value="c">Ein Symbol für Buddhas Lehre</label>
+    </div>
+
+    <div class="question" data-question="q5">
+      <p>5. Was ist Meditation im Buddhismus?</p>
+      <label><input type="radio" name="q5" value="a">Eine Übung für Achtsamkeit und Ruhe</label>
+      <label><input type="radio" name="q5" value="b">Ein Tanzritual</label>
+      <label><input type="radio" name="q5" value="c">Ein Festtag</label>
+    </div>
+
+    <div class="question" data-question="q6">
+      <p>6. Was symbolisiert der Lotus?</p>
+      <label><input type="radio" name="q6" value="a">Glück im Glücksspiel</label>
+      <label><input type="radio" name="q6" value="b">Reichtum und Macht</label>
+      <label><input type="radio" name="q6" value="c">Reinheit trotz schwieriger Umstände</label>
+    </div>
+
     <div class="quiz-actions">
       <button onclick="checkQuiz()">Auswerten</button>
       <button class="btn-secondary" onclick="resetQuiz()">Zurücksetzen</button>
@@ -807,36 +829,45 @@
 
 <script>
   function toggleMenu() {
-    document.getElementById("nav").classList.toggle("active");
+    const nav = document.getElementById("nav");
+    nav.classList.toggle("active");
   }
 
   function checkQuiz() {
-    const correct = { q1: "b", q2: "b", q3: "b" };
+    const correct = {
+      q1: "b",
+      q2: "b",
+      q3: "b",
+      q4: "c",
+      q5: "a",
+      q6: "c"
+    };
+
     let score = 0;
 
-    // сбрасываем стили вопросов
     document.querySelectorAll(".question").forEach(q => {
       q.classList.remove("correct", "wrong");
     });
 
     for (let q in correct) {
       const selected = document.querySelector('input[name="' + q + '"]:checked');
-      const questionBlock = document.querySelector('.question[data-question="' + q + '"]');
+      const block = document.querySelector('.question[data-question="' + q + '"]');
+
       if (selected && selected.value === correct[q]) {
         score++;
-        questionBlock.classList.add("correct");
+        block.classList.add("correct");
       } else if (selected) {
-        questionBlock.classList.add("wrong");
+        block.classList.add("wrong");
       }
     }
 
     document.getElementById("result").textContent =
-      "Du hast " + score + " von 3 Fragen richtig beantwortet.";
+      "Du hast " + score + " von 6 Fragen richtig beantwortet.";
   }
 
   function resetQuiz() {
     document.querySelectorAll("input[type=radio]").forEach(r => r.checked = false);
-    document.getElementById("result")..textContent = "";
+    document.getElementById("result").textContent = "";
     document.querySelectorAll(".question").forEach(q => {
       q.classList.remove("correct", "wrong");
     });
