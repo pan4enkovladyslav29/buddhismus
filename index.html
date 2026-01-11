@@ -25,6 +25,7 @@
       --accent-dark: #b3362c;
 
       --accent-gold: #d7b168;
+      --accent-gold-soft: rgba(215,177,104,0.16);
       --link-hover: #f4c47a;
 
       --radius-lg: 18px;
@@ -59,13 +60,41 @@
       color: inherit;
     }
 
-    /* HEADER */
+    /* ANIMATIONS */
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes soft-glow {
+      0% { box-shadow: 0 0 0 rgba(215,177,104,0.0); }
+      100% { box-shadow: 0 0 24px rgba(215,177,104,0.35); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fade-in-up 0.7s ease-out forwards;
+    }
+
+    .fade-in.delay-1 { animation-delay: 0.1s; }
+    .fade-in.delay-2 { animation-delay: 0.2s; }
+    .fade-in.delay-3 { animation-delay: 0.3s; }
+    .fade-in.delay-4 { animation-delay: 0.4s; }
+
+    /* LAYOUT */
     header {
       position: sticky;
       top: 0;
       z-index: 1000;
       backdrop-filter: blur(20px);
-      background: linear-gradient(to bottom, rgba(5,6,8,0.95), rgba(5,6,8,0.8), rgba(5,6,8,0));
+      background: linear-gradient(to bottom, rgba(5,6,8,0.96), rgba(5,6,8,0.9), rgba(5,6,8,0.0));
       border-bottom: 1px solid rgba(255,255,255,0.04);
     }
 
@@ -79,16 +108,43 @@
       gap: 1.5rem;
     }
 
-    .logo h1 {
+    /* LOGO */
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(215,177,104,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 0%, rgba(244,196,122,0.6), transparent 55%),
+                  radial-gradient(circle at 70% 100%, rgba(226,77,63,0.4), transparent 55%);
+      box-shadow: 0 0 18px rgba(215,177,104,0.45);
+    }
+
+    .logo-icon::before {
+      content: "☸";
+      font-size: 1.1rem;
+      color: var(--accent-gold);
+      text-shadow: 0 0 8px rgba(0,0,0,0.6);
+    }
+
+    .logo-text h1 {
       font-family: "Playfair Display", serif;
-      font-size: 1.7rem;
-      letter-spacing: 0.06em;
+      font-size: 1.6rem;
+      letter-spacing: 0.16em;
       color: var(--accent-gold);
       text-transform: uppercase;
     }
 
     .logo-sub {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--text-muted);
       margin-top: 0.1rem;
     }
@@ -96,9 +152,10 @@
     .authors {
       font-size: 0.72rem;
       color: var(--text-soft);
-      margin-top: 0.3rem;
+      margin-top: 0.25rem;
     }
 
+    /* NAVIGATION */
     nav {
       display: flex;
       gap: 0.4rem;
@@ -122,6 +179,7 @@
       background: var(--bg-chip);
       border-color: rgba(255,255,255,0.08);
       color: var(--link-hover);
+      box-shadow: 0 0 10px rgba(215,177,104,0.18);
     }
 
     nav a:focus {
@@ -129,7 +187,7 @@
       outline-offset: 2px;
     }
 
-    /* BURGER MENU */
+    /* BURGER */
     .burger {
       display: none;
       flex-direction: column;
@@ -156,7 +214,7 @@
         border-radius: var(--radius-md);
         box-shadow: var(--shadow-soft);
         border: 1px solid var(--border-subtle);
-        min-width: 180px;
+        min-width: 190px;
       }
 
       nav a {
@@ -173,22 +231,366 @@
       }
     }
 
-    /* MAIN */
+    /* MAIN LAYOUT */
     main {
       max-width: 1200px;
       margin: auto;
       padding: 1.5rem;
       padding-top: 2.2rem;
     }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2.1rem;
+      align-items: center;
+      margin-bottom: 2.8rem;
+    }
+
+    .hero-text {
+      padding: 1.3rem 1.4rem;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(215,177,104,0.09), transparent 60%),
+                  linear-gradient(to bottom right, rgba(21,23,33,0.98), rgba(12,13,20,0.98));
+      border: 1px solid rgba(215,177,104,0.16);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-gold);
+      margin-bottom: 0.55rem;
+    }
+
+    .hero-text h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.9rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-sub {
+      color: var(--text-soft);
+      font-size: 0.95rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-text p {
+      font-size: 0.93rem;
+      color: var(--text-soft);
+    }
+
+    .hero-actions {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      align-items: center;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.55rem 1.3rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.18s ease-out;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+      color: #fff;
+      box-shadow: 0 12px 28px rgba(226,77,63,0.55);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+      animation: soft-glow 0.25s forwards;
+    }
+
+    .btn-ghost {
+      background: rgba(255,255,255,0.02);
+      border-color: rgba(255,255,255,0.12);
+      color: var(--text-soft);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.05);
+      color: var(--link-hover);
+    }
+
+    .hero-tagline {
+      margin-top: 0.8rem;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      border-left: 2px solid rgba(215,177,104,0.6);
+      padding-left: 0.7rem;
+    }
+
+    .hero-image {
+      position: relative;
+      border-radius: var(--radius-lg);
+      padding: 0.6rem;
+      background: radial-gradient(circle at top, rgba(215,177,104,0.16), transparent 60%);
+      border: 1px solid rgba(215,177,104,0.18);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      max-height: 320px;
+      width: 100%;
+      border-radius: calc(var(--radius-lg) - 6px);
+      transform: translateY(0);
+      transition: transform 0.55s ease-out;
+    }
+
+    .hero-image:hover img {
+      transform: translateY(-6px) scale(1.01);
+    }
+
+    .hero-pill {
+      position: absolute;
+      bottom: 10px;
+      left: 14px;
+      padding: 0.32rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(5,6,8,0.86);
+      border: 1px solid rgba(215,177,104,0.6);
+      color: var(--accent-gold);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      box-shadow: 0 0 12px rgba(215,177,104,0.9);
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-image {
+        order: -1;
+      }
+    }
+
+    /* SECTIONS */
+    section {
+      margin-bottom: 2.4rem;
+    }
+
+    section h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.35rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .section-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-gold);
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(215,177,104,0.4);
+      background: var(--accent-gold-soft);
+    }
+
+    .section-intro {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-bottom: 0.9rem;
+    }
+
+    .section-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.4rem;
+      background: linear-gradient(135deg, rgba(21,23,33,0.96), rgba(8,9,14,0.98));
+      border-radius: var(--radius-lg);
+      padding: 1.3rem 1.4rem;
+      border: 1px solid rgba(255,255,255,0.04);
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.18s ease-out, box-shadow 0.18s ease-out, border-color 0.18s ease-out;
+    }
+
+    .section-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(215,177,104,0.45);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.75);
+    }
+
+    .section-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-card p {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-card ul {
+      list-style: none;
+      display: grid;
+      gap: 0.3rem;
+      font-size: 0.88rem;
+    }
+
+    .section-card li::before {
+      content: "•";
+      color: var(--accent-gold);
+      margin-right: 0.4rem;
+    }
+
+    @media (max-width: 800px) {
+      .section-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* QUIZ */
+    #quiz h3 {
+      margin-bottom: 0.3rem;
+    }
+
+    .quiz-sub {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-bottom: 1rem;
+    }
+
+    .question {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      padding: 0.95rem 1.05rem;
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 0.8rem;
+      transition: border-color 0.18s ease-out, box-shadow 0.18s ease-out, background 0.18s ease-out;
+    }
+
+    .question p {
+      font-size: 0.9rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .question label {
+      display: block;
+      font-size: 0.86rem;
+      color: var(--text-soft);
+      cursor: pointer;
+    }
+
+    .question input {
+      margin-right: 0.35rem;
+    }
+
+    .question.correct {
+      border-color: rgba(76, 175, 80, 0.8);
+      box-shadow: 0 0 18px rgba(76, 175, 80, 0.35);
+      background: rgba(76, 175, 80, 0.06);
+    }
+
+    .question.wrong {
+      border-color: rgba(244, 67, 54, 0.8);
+      box-shadow: 0 0 18px rgba(244, 67, 54, 0.35);
+      background: rgba(244, 67, 54, 0.06);
+    }
+
+    .quiz-actions {
+      margin-top: 0.9rem;
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .quiz-actions button {
+      border-radius: 999px;
+      border: none;
+      padding: 0.45rem 1.2rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.18s;
+    }
+
+    .quiz-actions button:first-child {
+      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+      color: #fff;
+      box-shadow: 0 12px 28px rgba(226,77,63,0.55);
+    }
+
+    .quiz-actions button:first-child:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.18);
+      color: var(--text-soft);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.04);
+    }
+
+    #result {
+      margin-top: 0.9rem;
+      font-size: 0.95rem;
+      color: var(--accent-gold);
+    }
+
+    /* FOOTER */
+    footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 1.4rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255,255,255,0.04);
+      margin-top: 1rem;
+    }
+
+    footer span {
+      color: var(--text-soft);
+    }
   </style>
 </head>
+
 <body>
 
 <header>
-  <div class="header-inner">
+  <div class="header-inner fade-in delay-1">
     <div>
-      <div class="logo">
-        <h1>Buddhismus</h1>
+      <div class="logo-wrap">
+        <div class="logo-icon"></div>
+        <div class="logo-text">
+          <h1>BUDDHISMUS</h1>
+        </div>
       </div>
       <div class="logo-sub">Einführung, Symbole, Rituale & mehr</div>
       <div class="authors">Autoren: Vladyslav, Bruno, Ornela, Sofja, Mariela, Sara</div>
@@ -213,266 +615,264 @@
 </header>
 
 <main>
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-text">
-    <div class="hero-eyebrow">Ist Buddhismus neu für dich?</div>
-    <h2>Ein kurzer Überblick über eine alte Lehre</h2>
-    <p class="hero-sub">
-      Der Buddhismus ist eine der ältesten spirituellen Traditionen der Welt. Er basiert auf den Lehren
-      von Siddhartha Gautama, dem Buddha.
+  <!-- HERO -->
+  <section class="hero fade-in delay-2">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Ist Buddhismus neu für dich?</div>
+      <h2>Ein kurzer Überblick über eine alte Lehre</h2>
+      <p class="hero-sub">
+        Der Buddhismus ist eine der ältesten spirituellen Traditionen der Welt. Er basiert auf den Lehren
+        von Siddhartha Gautama, dem Buddha.
+      </p>
+      <p>
+        Auf dieser Seite findest du Informationen über Kleidung, Tempel, Rituale, Feste, Symbole und Lebensregeln im Buddhismus – übersichtlich und einfach erklärt.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#gottesbild" class="btn-primary">Grundlagen entdecken</a>
+        <a href="#quiz" class="btn-ghost">Wissen testen</a>
+      </div>
+
+      <div class="hero-tagline">
+        In wenigen Minuten bekommst du einen klaren Eindruck davon, wie Buddhismus im Alltag gelebt wird.
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <img src="https://i.pinimg.com/736x/a2/89/d7/a289d72c1f28b2ae34d96ae2ba916f9b.jpg"
+           alt="Buddha Statue Einführung">
+      <div class="hero-pill">
+        <div class="hero-dot"></div>
+        Einführung in buddhistische Kultur & Praxis
+      </div>
+    </div>
+  </section>
+
+  <!-- Kleidung -->
+  <section id="kleidung" class="fade-in delay-1">
+    <h3><span class="section-tag">Alltag</span> Kleidung – Roben der Buddhisten</h3>
+    <p class="section-intro">
+      Die Kleidung von Mönchen und Nonnen soll nicht modisch wirken, sondern Bescheidenheit, Einfachheit
+      und das Loslassen von äußerem Besitz ausdrücken.
     </p>
-    <p>
-      Auf dieser Seite findest du Informationen über Kleidung, Tempel, Rituale, Feste, Symbole und Lebensregeln im Buddhismus – übersichtlich und einfach erklärt.
+    <div class="section-card">
+      <div>
+        <div class="section-meta">Mönche & Nonnen</div>
+        <p>Buddhistische Mönche und Nonnen tragen einfache Roben, die Bescheidenheit und Loslassen symbolisieren.</p>
+        <ul>
+          <li>Typische Farben: Orange, Rot, Braun</li>
+          <li>Die Robe erinnert daran, sich auf das Wesentliche zu konzentrieren</li>
+          <li>Auch Besucher kleiden sich im Tempel respektvoll und schlicht</li>
+        </ul>
+      </div>
+      <img src="https://i.pinimg.com/1200x/7e/e9/4d/7ee94d49a1e78c491f342beab8fe17d5.jpg"
+           alt="Buddhistische Kleidung">
+    </div>
+  </section>
+
+  <!-- Gotteshaus -->
+  <section id="gotteshaus" class="fade-in delay-2">
+    <h3><span class="section-tag">Ort der Stille</span> Gotteshaus – Tempel & Stupas</h3>
+    <p class="section-intro">
+      Buddhistische Tempel sind Räume für Meditation, Dankbarkeit und innere Ruhe.
     </p>
+    <div class="section-card">
+      <div>
+        <div class="section-meta">Tempel & Stupas</div>
+        <p>Buddhistische Tempel sind Orte der Meditation, des Gebets und der Ruhe.</p>
+        <ul>
+          <li>Buddha-Statuen erinnern an Mitgefühl und Weisheit</li>
+          <li>Räucherstäbchen & Opfergaben zeigen Respekt und Dankbarkeit</li>
+          <li>Die ruhige Atmosphäre hilft, zur inneren Stille zu kommen</li>
+        </ul>
+      </div>
+      <img src="https://i.pinimg.com/736x/d6/e5/74/d6e574faec8d15d1f0af497b120212ce.jpg"
+           alt="Buddhistischer Tempel">
+    </div>
+  </section>
 
-    <div class="hero-actions">
-      <a href="#gottesbild" class="btn-primary">
-        Grundlagen entdecken
-      </a>
-      <a href="#quiz" class="btn-ghost">
-        Wissen testen
-      </a>
+  <!-- Gottesbild -->
+  <section id="gottesbild" class="fade-in delay-3">
+    <h3><span class="section-tag">Lehrer statt Gott</span> Gottesbild – Buddha & Bodhisattvas</h3>
+    <p class="section-intro">
+      Im Buddhismus steht kein allmächtiger Schöpfergott im Mittelpunkt. Stattdessen folgen die Menschen
+      dem Beispiel des Buddha und anderer erleuchteter Wesen.
+    </p>
+    <div class="section-card">
+      <div>
+        <div class="section-meta">Buddha als Vorbild</div>
+        <p>Der Buddhismus verehrt keinen Schöpfergott. Buddha gilt als erleuchteter Lehrer.</p>
+        <ul>
+          <li>Buddha steht für Weisheit und Klarheit</li>
+          <li>Bodhisattvas helfen anderen auf dem Weg</li>
+          <li>Bilder erinnern an Mitgefühl und Achtsamkeit</li>
+        </ul>
+      </div>
+      <img src="https://i.pinimg.com/736x/15/28/38/152838447d2284edea0507e1944ea430.jpg"
+           alt="Buddha Statue">
+    </div>
+  </section>
+
+  <!-- Heilige Schrift -->
+  <section id="heilige-schrift" class="fade-in delay-1">
+    <h3><span class="section-tag">Texte</span> Heilige Schrift – Pali-Kanon & Sutren</h3>
+    <p class="section-intro">
+      Die Lehren des Buddha wurden über Jahrhunderte mündlich überliefert und später in Sammlungen wie dem Pali-Kanon festgehalten.
+    </p>
+    <div class="section-card">
+      <div>
+        <div class="section-meta">Lehren & Regeln</div>
+        <p>Der Buddhismus besitzt viele heilige Texte, darunter den Pali-Kanon.</p>
+        <ul>
+          <li>Reden und Unterweisungen des Buddha</li>
+          <li>Regeln für Mönche und Nonnen</li>
+          <li>Texte über Leid und Befreiung</li>
+        </ul>
+      </div>
+      <img src="https://i.pinimg.com/1200x/4a/69/6e/4a696ea613ef03504664e58f6483b47b.jpg"
+           alt="Heilige Schrift">
+    </div>
+  </section>
+
+  <!-- Feste -->
+  <section id="feste" class="fade-in delay-2">
+    <h3><span class="section-tag">Feiern</span> Feste – Vesakh & mehr</h3>
+    <p class="section-intro">
+      Buddhistische Feste erinnern an wichtige Momente im Leben des Buddha.
+    </p>
+    <div class="section-card">
+      <div>
+        <div class="section-meta">Vesakh & andere Tage</div>
+        <p>Buddhistische Feste feiern das Leben und die Lehren Buddhas.</p>
+        <ul>
+          <li>Vesakh: Geburt, Erleuchtung und Tod des Buddha</li>
+          <li>Lichter symbolisieren Weisheit</li>
+          <li>Gemeinsame Meditation</li>
+        </ul>
+      </div>
+      <img src="https://i.pinimg.com/736x/82/c0/34/82c034f8734ee14a92a7f4dc6ac09710.jpg"
+           alt="Buddhistische Feste">
+    </div>
+  </section>
+
+  <!-- Rituale -->
+  <section id="rituale" class="fade-in delay-3">
+    <h3><span class="section-tag">Praxis</span> Rituale – Meditation & Achtsamkeit</h3>
+    <p class="section-intro">
+      Rituale helfen, den Geist zu beruhigen und Mitgefühl im Alltag zu leben.
+    </p>
+    <div class="section-card">
+      <div>
+        <div class="section-meta">Übungen für den Geist</div>
+        <p>Rituale fördern innere Ruhe und Klarheit.</p>
+        <ul>
+          <li>Meditation stärkt Achtsamkeit</li>
+          <li>Mantras sammeln den Geist</li>
+          <li>Räucherstäbchen erinnern an Vergänglichkeit</li>
+        </ul>
+      </div>
+      <img src="https://images.pexels.com/photos/3759651/pexels-photo-3759651.jpeg"
+           alt="Meditation">
+    </div>
+  </section>
+
+  <!-- Lebensregeln -->
+  <section id="lebensregeln" class="fade-in delay-1">
+    <h3><span class="section-tag">Ethik</span> Lebensregeln – Die Fünf Silas</h3>
+    <p class="section-intro">
+      Die Fünf Silas sind einfache Regeln für ein friedliches und verantwortungsvolles Leben.
+    </p>
+    <div class="section-card">
+      <div>
+        <div class="section-meta">Fünf grundlegende Regeln</div>
+        <p>Die buddhistische Ethik hilft, Leid zu verringern.</p>
+        <ul>
+          <li>Kein Lebewesen verletzen</li>
+          <li>Nicht stehlen</li>
+          <li>Ehrlich sprechen</li>
+          <li>Verantwortungsvoller Umgang mit Sexualität</li>
+          <li>Keine Rauschmittel</li>
+        </ul>
+      </div>
+      <img src="https://i.pinimg.com/736x/cd/20/54/cd205465bc58d64583e230d1e0e5c16b.jpg"
+           alt="Lebensregeln">
+    </div>
+  </section>
+
+  <!-- Symbole -->
+  <section id="symbole" class="fade-in delay-2">
+    <h3><span class="section-tag">Zeichen</span> Symbole – Lotus & Dharma-Rad</h3>
+    <p class="section-intro">
+      Symbole machen die Lehre sichtbar und erinnern an wichtige Werte.
+    </p>
+    <div class="section-card">
+      <div>
+        <div class="section-meta">Erinnerungen an die Lehre</div>
+        <p>Symbole erinnern an die Lehre Buddhas.</p>
+        <ul>
+          <li>Dharma-Rad: Weg der Lehre</li>
+          <li>Lotus: Reinheit</li>
+          <li>Buddha-Statuen: Mitgefühl</li>
+        </ul>
+      </div>
+      <img src="https://i.pinimg.com/1200x/88/d9/61/88d961f736a8dfd8cdefb86fc4b24612.jpg"
+           alt="Buddhistische Symbole">
+    </div>
+  </section>
+  <!-- QUIZ -->
+  <section id="quiz" class="fade-in delay-3">
+    <h3><span class="section-tag">Test</span> Quiz – Teste dein Wissen</h3>
+    <div class="quiz-sub">
+      Beantworte die Fragen und finde heraus, wie gut du die Grundlagen des Buddhismus verstanden hast.
     </div>
 
-    <div class="hero-tagline">
-      In wenigen Minuten bekommst du einen klaren Eindruck davon, wie Buddhismus im Alltag gelebt wird.
+    <div class="question" data-question="q1">
+      <p>1. Wer steht im Mittelpunkt des Buddhismus?</p>
+      <label><input type="radio" name="q1" value="b">Buddha, ein erleuchteter Lehrer</label>
+      <label><input type="radio" name="q1" value="a">Ein allmächtiger Schöpfergott</label>
     </div>
-  </div>
 
-  <div class="hero-image">
-    <img src="https://i.pinimg.com/736x/a2/89/d7/a289d72c1f28b2ae34d96ae2ba916f9b.jpg"
-         alt="Buddha Statue Einführung">
-    <div class="hero-pill">
-      <div class="hero-dot"></div>
-      Einführung in buddhistische Kultur & Praxis
+    <div class="question" data-question="q2">
+      <p>2. Wie heißt die Kleidung der Mönche?</p>
+      <label><input type="radio" name="q2" value="b">Robe</label>
+      <label><input type="radio" name="q2" value="a">Uniform</label>
     </div>
-  </div>
-</section>
-<!-- Kleidung -->
-<section id="kleidung">
-  <h3><span class="section-tag">Alltag</span> Kleidung – Roben der Buddhisten</h3>
-  <p class="section-intro">
-    Die Kleidung von Mönchen und Nonnen soll nicht modisch wirken, sondern Bescheidenheit, Einfachheit
-    und das Loslassen von äußerem Besitz ausdrücken.
-  </p>
-  <div class="section-card">
-    <div>
-      <div class="section-meta">Mönche & Nonnen</div>
-      <p>Buddhistische Mönche und Nonnen tragen einfache Roben, die Bescheidenheit und Loslassen symbolisieren.</p>
-      <ul>
-        <li>Typische Farben: Orange, Rot, Braun</li>
-        <li>Die Robe erinnert daran, sich auf das Wesentliche zu konzentrieren</li>
-        <li>Auch Besucher kleiden sich im Tempel respektvoll und schlicht</li>
-      </ul>
+
+    <div class="question" data-question="q3">
+      <p>3. Was symbolisiert die Lotusblume?</p>
+      <label><input type="radio" name="q3" value="b">Reinheit mitten im Alltag</label>
+      <label><input type="radio" name="q3" value="a">Reichtum und Macht</label>
     </div>
-    <img src="https://i.pinimg.com/1200x/7e/e9/4d/7ee94d49a1e78c491f342beab8fe17d5.jpg" 
-         alt="Buddhistische Kleidung">
-  </div>
-</section>
 
-<!-- Gotteshaus -->
-<section id="gotteshaus">
-  <h3><span class="section-tag">Ort der Stille</span> Gotteshaus – Tempel & Stupas</h3>
-  <p class="section-intro">
-    Buddhistische Tempel sind Räume für Meditation, Dankbarkeit und innere Ruhe.
-  </p>
-  <div class="section-card">
-    <div>
-      <div class="section-meta">Tempel & Stupas</div>
-      <p>Buddhistische Tempel sind Orte der Meditation, des Gebets und der Ruhe.</p>
-      <ul>
-        <li>Buddha-Statuen erinnern an Mitgefühl und Weisheit</li>
-        <li>Räucherstäbchen & Opfergaben zeigen Respekt und Dankbarkeit</li>
-        <li>Die ruhige Atmosphäre hilft, zur inneren Stille zu kommen</li>
-      </ul>
+    <div class="question" data-question="q4">
+      <p>4. Was ist das Dharma-Rad?</p>
+      <label><input type="radio" name="q4" value="a">Ein Symbol für Reichtum</label>
+      <label><input type="radio" name="q4" value="b">Ein Schmuckstück der Mönche</label>
+      <label><input type="radio" name="q4" value="c">Ein Symbol für Buddhas Lehre</label>
     </div>
-    <img src="https://i.pinimg.com/736x/d6/e5/74/d6e574faec8d15d1f0af497b120212ce.jpg" 
-         alt="Buddhistischer Tempel">
-  </div>
-</section>
 
-<!-- Gottesbild -->
-<section id="gottesbild">
-  <h3><span class="section-tag">Lehrer statt Gott</span> Gottesbild – Buddha & Bodhisattvas</h3>
-  <p class="section-intro">
-    Im Buddhismus steht kein allmächtiger Schöpfergott im Mittelpunkt. Stattdessen folgen die Menschen
-    dem Beispiel des Buddha und anderer erleuchteter Wesen.
-  </p>
-  <div class="section-card">
-    <div>
-      <div class="section-meta">Buddha als Vorbild</div>
-      <p>Der Buddhismus verehrt keinen Schöpfergott. Buddha gilt als erleuchteter Lehrer.</p>
-      <ul>
-        <li>Buddha steht für Weisheit und Klarheit</li>
-        <li>Bodhisattvas helfen anderen auf dem Weg</li>
-        <li>Bilder erinnern an Mitgefühl und Achtsamkeit</li>
-      </ul>
+    <div class="question" data-question="q5">
+      <p>5. Was ist Meditation im Buddhismus?</p>
+      <label><input type="radio" name="q5" value="a">Eine Übung für Achtsamkeit und Ruhe</label>
+      <label><input type="radio" name="q5" value="b">Ein Tanzritual</label>
+      <label><input type="radio" name="q5" value="c">Ein Festtag</label>
     </div>
-    <img src="https://i.pinimg.com/736x/15/28/38/152838447d2284edea0507e1944ea430.jpg" 
-         alt="Buddha Statue">
-  </div>
-</section>
 
-<!-- Heilige Schrift -->
-<section id="heilige-schrift">
-  <h3><span class="section-tag">Texte</span> Heilige Schrift – Pali-Kanon & Sutren</h3>
-  <p class="section-intro">
-    Die Lehren des Buddha wurden über Jahrhunderte mündlich überliefert und später in Sammlungen wie dem Pali-Kanon festgehalten.
-  </p>
-  <div class="section-card">
-    <div>
-      <div class="section-meta">Lehren & Regeln</div>
-      <p>Der Buddhismus besitzt viele heilige Texte, darunter den Pali-Kanon.</p>
-      <ul>
-        <li>Reden und Unterweisungen des Buddha</li>
-        <li>Regeln für Mönche und Nonnen</li>
-        <li>Texte über Leid und Befreiung</li>
-      </ul>
+    <div class="question" data-question="q6">
+      <p>6. Was symbolisiert der Lotus?</p>
+      <label><input type="radio" name="q6" value="a">Glück im Glücksspiel</label>
+      <label><input type="radio" name="q6" value="b">Reichtum und Macht</label>
+      <label><input type="radio" name="q6" value="c">Reinheit trotz schwieriger Umstände</label>
     </div>
-    <img src="https://i.pinimg.com/1200x/4a/69/6e/4a696ea613ef03504664e58f6483b47b.jpg" 
-         alt="Heilige Schrift">
-  </div>
-</section>
 
-<!-- Feste -->
-<section id="feste">
-  <h3><span class="section-tag">Feiern</span> Feste – Vesakh & mehr</h3>
-  <p class="section-intro">
-    Buddhistische Feste erinnern an wichtige Momente im Leben des Buddha.
-  </p>
-  <div class="section-card">
-    <div>
-      <div class="section-meta">Vesakh & andere Tage</div>
-      <p>Buddhistische Feste feiern das Leben und die Lehren Buddhas.</p>
-      <ul>
-        <li>Vesakh: Geburt, Erleuchtung und Tod des Buddha</li>
-        <li>Lichter symbolisieren Weisheit</li>
-        <li>Gemeinsame Meditation</li>
-      </ul>
+    <div class="quiz-actions">
+      <button onclick="checkQuiz()">Auswerten</button>
+      <button class="btn-secondary" onclick="resetQuiz()">Zurücksetzen</button>
     </div>
-    <img src="https://i.pinimg.com/736x/82/c0/34/82c034f8734ee14a92a7f4dc6ac09710.jpg" 
-         alt="Buddhistische Feste">
-  </div>
-</section>
 
-<!-- Rituale -->
-<section id="rituale">
-  <h3><span class="section-tag">Praxis</span> Rituale – Meditation & Achtsamkeit</h3>
-  <p class="section-intro">
-    Rituale helfen, den Geist zu beruhigen und Mitgefühl im Alltag zu leben.
-  </p>
-  <div class="section-card">
-    <div>
-      <div class="section-meta">Übungen für den Geist</div>
-      <p>Rituale fördern innere Ruhe und Klarheit.</p>
-      <ul>
-        <li>Meditation stärkt Achtsamkeit</li>
-        <li>Mantras sammeln den Geist</li>
-        <li>Räucherstäbchen erinnern an Vergänglichkeit</li>
-      </ul>
-    </div>
-    <img src="https://images.pexels.com/photos/3759651/pexels-photo-3759651.jpeg" 
-         alt="Meditation">
-  </div>
-</section>
+    <div id="result"></div>
+  </section>
 
-<!-- Lebensregeln -->
-<section id="lebensregeln">
-  <h3><span class="section-tag">Ethik</span> Lebensregeln – Die Fünf Silas</h3>
-  <p class="section-intro">
-    Die Fünf Silas sind einfache Regeln für ein friedliches und verantwortungsvolles Leben.
-  </p>
-  <div class="section-card">
-    <div>
-      <div class="section-meta">Fünf grundlegende Regeln</div>
-      <p>Die buddhistische Ethik hilft, Leid zu verringern.</p>
-      <ul>
-        <li>Kein Lebewesen verletzen</li>
-        <li>Nicht stehlen</li>
-        <li>Ehrlich sprechen</li>
-        <li>Verantwortungsvoller Umgang mit Sexualität</li>
-        <li>Keine Rauschmittel</li>
-      </ul>
-    </div>
-    <img src="https://i.pinimg.com/736x/cd/20/54/cd205465bc58d64583e230d1e0e5c16b.jpg" 
-         alt="Lebensregeln">
-  </div>
-</section>
-
-<!-- Symbole -->
-<section id="symbole">
-  <h3><span class="section-tag">Zeichen</span> Symbole – Lotus & Dharma-Rad</h3>
-  <p class="section-intro">
-    Symbole machen die Lehre sichtbar und erinnern an wichtige Werte.
-  </p>
-  <div class="section-card">
-    <div>
-      <div class="section-meta">Erinnerungen an die Lehre</div>
-      <p>Symbole erinnern an die Lehre Buddhas.</p>
-      <ul>
-        <li>Dharma-Rad: Weg der Lehre</li>
-        <li>Lotus: Reinheit</li>
-        <li>Buddha-Statuen: Mitgefühl</li>
-      </ul>
-    </div>
-    <img src="https://i.pinimg.com/1200x/88/d9/61/88d961f736a8dfd8cdefb86fc4b24612.jpg" 
-         alt="Buddhistische Symbole">
-  </div>
-</section>
-<!-- QUIZ -->
-<section id="quiz">
-  <h3>Quiz – Teste dein Wissen</h3>
-  <div class="quiz-sub">
-    Beantworte die Fragen und finde heraus, wie gut du die Grundlagen des Buddhismus verstanden hast.
-  </div>
-
-  <div class="question" data-question="q1">
-    <p>1. Wer steht im Mittelpunkt des Buddhismus?</p>
-    <label><input type="radio" name="q1" value="b">Buddha, ein erleuchteter Lehrer</label>
-    <label><input type="radio" name="q1" value="a">Ein allmächtiger Schöpfergott</label>
-  </div>
-
-  <div class="question" data-question="q2">
-    <p>2. Wie heißt die Kleidung der Mönche?</p>
-    <label><input type="radio" name="q2" value="b">Robe</label>
-    <label><input type="radio" name="q2" value="a">Uniform</label>
-  </div>
-
-  <div class="question" data-question="q3">
-    <p>3. Was symbolisiert die Lotusblume?</p>
-    <label><input type="radio" name="q3" value="b">Reinheit mitten im Alltag</label>
-    <label><input type="radio" name="q3" value="a">Reichtum und Macht</label>
-  </div>
-
-  <div class="question" data-question="q4">
-    <p>4. Was ist das Dharma-Rad?</p>
-    <label><input type="radio" name="q4" value="a">Ein Symbol für Reichtum</label>
-    <label><input type="radio" name="q4" value="b">Ein Schmuckstück der Mönche</label>
-    <label><input type="radio" name="q4" value="c">Ein Symbol für Buddhas Lehre</label>
-  </div>
-
-  <div class="question" data-question="q5">
-    <p>5. Was ist Meditation im Buddhismus?</p>
-    <label><input type="radio" name="q5" value="a">Eine Übung für Achtsamkeit und Ruhe</label>
-    <label><input type="radio" name="q5" value="b">Ein Tanzritual</label>
-    <label><input type="radio" name="q5" value="c">Ein Festtag</label>
-  </div>
-
-  <div class="question" data-question="q6">
-    <p>6. Was symbolisiert der Lotus?</p>
-    <label><input type="radio" name="q6" value="a">Glück im Glücksspiel</label>
-    <label><input type="radio" name="q6" value="b">Reichtum und Macht</label>
-    <label><input type="radio" name="q6" value="c">Reinheit trotz schwieriger Umstände</label>
-  </div>
-
-  <div class="quiz-actions">
-    <button onclick="checkQuiz()">Auswerten</button>
-    <button class="btn-secondary" onclick="resetQuiz()">Zurücksetzen</button>
-  </div>
-
-  <div id="result"></div>
-</section>
 </main>
 
 <footer>
