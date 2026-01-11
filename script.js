@@ -1,26 +1,34 @@
-function checkQuiz() {
+function checkAnswers() {
     const answers = {
-        q1: 'b', // Vor 2500 Jahren
-        q2: 'b', // Orange
-        q3: 'b', // Ein Reliquienbehälter
-        q4: 'b', // Nein
-        q5: 'b', // Pali-Kanon
-        q6: 'a', // Vesak
-        q7: 'a', // Rezitation und Opfergaben
-        q8: 'b', // Fünf
-        q9: 'a'  // Die Lehren Buddhas
+        q1: "a", // ~500 v. Chr.
+        q2: "b", // Safran/Orange
+        q3: "b", // 5
+        q4: "b"  // Reinheit & Erleuchtung
     };
-    
+
     let score = 0;
-    const form = document.getElementById('quiz-form');
-    const questions = Object.keys(answers);
-    
-    questions.forEach(q => {
-        const selected = form.querySelector(input[name="${q}"]:checked);
-        if (selected && selected.value === answers[q]) {
+    const total = Object.keys(answers).length;
+
+    for (let key in answers) {
+        const selected = document.querySelector(input[name="${key}"]:checked);
+        if (selected && selected.value === answers[key]) {
             score++;
         }
-    });
-    
-    document.getElementById('result').innerHTML = Du hast ${score} von ${questions.length} Fragen richtig beantwortet!;
+    }
+
+    const resultDiv = document.getElementById("quizResult");
+
+    if (score === total) {
+        resultDiv.innerHTML = Perfekt! \( {score}/ \){total} – Du bist ein echter Kenner des Buddhismus! 🙏;
+        resultDiv.style.backgroundColor = "#d4f4dd";
+        resultDiv.style.color = "#006400";
+    } else if (score >= total - 1) {
+        resultDiv.innerHTML = Sehr gut! \( {score}/ \){total} – fast perfekt! 🌿;
+        resultDiv.style.backgroundColor = "#fff3cd";
+        resultDiv.style.color = "#856404";
+    } else {
+        resultDiv.innerHTML = Noch etwas üben? \( {score}/ \){total} richtige Antworten 😊;
+        resultDiv.style.backgroundColor = "#f8d7da";
+        resultDiv.style.color = "#721c24";
+    }
 }
