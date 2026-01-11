@@ -1,107 +1,171 @@
-body {
-    font-family: Arial, sans-serif;
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #f8f5f0;
+    color: #2d2d2d;
+    line-height: 1.6;
 }
 
 header {
-    background-color: #ffcc00;
+    background: linear-gradient(135deg, #c99e59 0%, #8b5e3c 100%);
+    color: white;
     text-align: center;
-    padding: 20px;
+    padding: 2.5rem 1rem;
+}
+
+.header-content h1 {
+    font-family: 'Noto Serif', serif;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.credits {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.sticky-nav {
+    position: sticky;
+    top: 0;
+    background: #2c2c2c;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 nav ul {
     list-style: none;
-    padding: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: #333;
-}
-
-nav li {
-    margin: 10px;
+    padding: 0.8rem;
+    gap: 0.6rem;
 }
 
 nav a {
-    color: white;
+    color: #f5e8c7;
     text-decoration: none;
-    padding: 10px;
+    padding: 0.7rem 1.1rem;
+    border-radius: 30px;
+    transition: all 0.25s;
+    font-size: 0.95rem;
+    font-weight: 500;
 }
 
-nav a:hover {
-    background-color: #555;
+nav a:hover, nav a.active {
+    background: #c99e59;
+    color: #111;
 }
 
 main {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
+    max-width: 1100px;
+    margin: 2.5rem auto;
+    padding: 0 1.2rem;
 }
 
 section {
-    margin-bottom: 40px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-bottom: 4.5rem;
+    background: white;
+    border-radius: 12px;
+    padding: 2.2rem;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.08);
 }
 
 h2 {
-    color: #ff9900;
+    font-family: 'Noto Serif', serif;
+    color: #8b5e3c;
+    margin-bottom: 1.3rem;
+    font-size: 2.1rem;
 }
 
-.image-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1.5rem;
 }
 
-.image-gallery img {
-    max-width: 300px;
-    height: auto;
-    margin: 10px;
-    border-radius: 8px;
+.gallery img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
 }
 
-#quiz-form {
-    display: flex;
-    flex-direction: column;
+.symbols-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 1.4rem;
+    margin-top: 2rem;
 }
 
-.question {
-    margin-bottom: 20px;
+.symbol-item {
+    text-align: center;
+}
+
+.symbol-item img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 0.6rem;
+}
+
+.symbol-item span {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* QUIZ */
+.quiz-question {
+    margin: 1.8rem 0;
+    padding: 1.2rem;
+    background: #fdfaf5;
+    border-radius: 10px;
+}
+
+.quiz-question p {
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin: 0.5rem 0;
+    cursor: pointer;
 }
 
 button {
-    background-color: #ff9900;
+    background: #c99e59;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 50px;
     cursor: pointer;
-    border-radius: 5px;
+    transition: 0.3s;
+    margin-top: 1.5rem;
 }
 
 button:hover {
-    background-color: #cc7700;
+    background: #a67c41;
+    transform: translateY(-2px);
 }
 
-footer {
+.quiz-result {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    font-weight: bold;
     text-align: center;
-    padding: 10px;
-    background-color: #333;
-    color: white;
 }
 
-/* Responsive Design */
+/* Адаптивность */
 @media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-    }
-    
-    .image-gallery img {
-        max-width: 100%;
-    }
+    header h1 { font-size: 2.4rem; }
+    nav ul { flex-direction: column; align-items: center; }
+    nav a { width: 90%; text-align: center; }
+    section { padding: 1.6rem; }
 }
