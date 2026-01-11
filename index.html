@@ -1,164 +1,701 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Buddhismus – Entdecke die Lehre des Buddha</title>
-    <link rel="stylesheet" href="style.css"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buddhismus – Wissen und Einblick</title>
+  <style>
+    :root {
+      --bg: #f5f3ed;
+      --primary: #c48f3a;
+      --primary-dark: #9a6f25;
+      --text: #333333;
+      --accent: #3a6b7f;
+      --card-bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      border-radius: 8px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #f5f3ed, #e9dfc9);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo-title {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .logo-title h1 {
+      font-size: 1.2rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .authors {
+      font-size: 0.8rem;
+      color: #555;
+    }
+
+    nav {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      font-size: 0.8rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: #555;
+      transition: all 0.2s ease;
+      background: rgba(255,255,255,0.7);
+    }
+
+    nav a:hover {
+      border-color: var(--primary);
+      color: var(--primary-dark);
+      background: #fff;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      align-items: center;
+    }
+
+    .hero-text h2 {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      color: var(--accent);
+    }
+
+    .hero-text p {
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: rgba(196, 143, 58, 0.15);
+      color: var(--primary-dark);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-image {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    section h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      color: var(--accent);
+    }
+
+    .section-content {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 1.25rem;
+      align-items: flex-start;
+      background: var(--card-bg);
+      padding: 1.25rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    }
+
+    .section-text p {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-text ul {
+      margin-left: 1.1rem;
+      margin-top: 0.25rem;
+      font-size: 0.9rem;
+    }
+
+    .section-text li {
+      margin-bottom: 0.25rem;
+    }
+
+    /* Quiz */
+
+    #quiz {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    }
+
+    #quiz h3 {
+      margin-bottom: 0.75rem;
+    }
+
+    .question {
+      margin-bottom: 1rem;
+    }
+
+    .question p {
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    .question label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+      cursor: pointer;
+    }
+
+    .quiz-actions {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      background: var(--primary);
+      color: #fff;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    button:hover {
+      background: var(--primary-dark);
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    #result {
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 800px) {
+      .hero,
+      .section-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+      }
+
+      .hero-text h2 {
+        font-size: 1.6rem;
+      }
+
+      main {
+        padding: 1rem 0.75rem 2.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-
-    <header>
-        <div class="header-content">
-            <h1>Buddhismus</h1>
-            <p class="credits">Erstellt von: Vladyslav, Bruno, Ornela, Sofja, Mariela, Sara</p>
+  <header>
+    <div class="header-inner">
+      <div class="logo-title">
+        <h1>Buddhismus</h1>
+        <div class="authors">
+          Autoren: Vladyslav, Bruno, Ornela, Sofja, Mariela, Sara
         </div>
-    </header>
+      </div>
+      <nav>
+        <a href="#kleidung">Kleidung</a>
+        <a href="#gotteshaus">Gotteshaus</a>
+        <a href="#gottesbild">Gottesbild</a>
+        <a href="#heilige-schrift">Heilige Schrift</a>
+        <a href="#feste">Feste</a>
+        <a href="#rituale">Rituale</a>
+        <a href="#lebensregeln">Lebensregeln</a>
+        <a href="#symbole">Symbole</a>
+        <a href="#quiz">Quiz</a>
+      </nav>
+    </div>
+  </header>
 
-    <nav class="sticky-nav">
-        <ul>
-            <li><a href="#einfuehrung">Einführung</a></li>
-            <li><a href="#kleidung">Kleidung</a></li>
-            <li><a href="#gotteshaus">Gotteshaus</a></li>
-            <li><a href="#gottesbild">Gottesbild</a></li>
-            <li><a href="#heiligeschrift">Heilige Schriften</a></li>
-            <li><a href="#feste">Feste</a></li>
-            <li><a href="#rituale">Rituale</a></li>
-            <li><a href="#lebensregeln">Lebensregeln</a></li>
-            <li><a href="#symbole">Symbole</a></li>
-            <li><a href="#quiz">Quiz</a></li>
-        </ul>
-    </nav>
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-text">
+        <span class="hero-tag">Einführung in den Buddhismus</span>
+        <h2>Was ist Buddhismus?</h2>
+        <p>
+          Der Buddhismus ist eine Religion und Lebensphilosophie, die auf die
+          Lehren von Siddhartha Gautama, dem Buddha, zurückgeht. Im Mittelpunkt
+          stehen innere Ruhe, Mitgefühl und die Befreiung vom Leiden.
+        </p>
+        <p>
+          Auf dieser Seite findest du Informationen über Kleidung, Tempel,
+          heilige Schriften, Feste, Rituale, Lebensregeln und Symbole im
+          Buddhismus.
+        </p>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.pexels.com/photos/105028/pexels-photo-105028.jpeg"
+             alt="Buddha-Statue mit ruhiger Atmosphäre" />
+      </div>
+    </section>
 
-    <main>
+    <!-- Kleidung -->
+    <section id="kleidung">
+      <h3>Kleidung – Kleidung der Buddhisten</h3>
+      <div class="section-content">
+        <div class="section-text">
+          <p>
+            Die traditionelle Kleidung von buddhistischen Mönchen und Nonnen
+            heißt <strong>Robe</strong. Sie besteht oft aus einfachen, weiten
+            Stoffbahnen. Die Farben können je nach Land unterschiedlich sein,
+            zum Beispiel orange, safran, rot oder braun.
+          </p>
+          <p>
+            Die Kleidung soll an Einfachheit, Bescheidenheit und Loslassen von
+            äußerlichem Luxus erinnern. Für viele buddhistische Laien gilt:
+          </p>
+          <ul>
+            <li>Schlichte, respektvolle Kleidung im Tempel</li>
+            <li>Oft bedeckte Schultern und Knie</li>
+            <li>Keine auffälligen oder lauten Farben</li>
+          </ul>
+        </div>
+        <div>
+          <img src="https://images.pexels.com/photos/461940/pexels-photo-461940.jpeg"
+               alt="Buddhistische Mönche in traditionellen Roben" />
+        </div>
+      </div>
+    </section>
 
-        <section id="einfuehrung">
-            <h2>Einführung in den Buddhismus</h2>
-            <p>Der Buddhismus entstand vor etwa 2500 Jahren in Indien. Siddhārtha Gautama, der spätere Buddha, suchte nach einem Weg, das menschliche Leiden zu überwinden. Nach Jahren der Askese und Meditation erreichte er unter dem Bodhi-Baum die Erleuchtung (Bodhi).</p>
-            <div class="gallery">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Große Buddha-Statue">
-                <img src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tempel in Thailand">
-            </div>
-        </section>
+    <!-- Gotteshaus -->
+    <section id="gotteshaus">
+      <h3>Gotteshaus – Tempel und Orte der Verehrung</h3>
+      <div class="section-content">
+        <div class="section-text">
+          <p>
+            Im Buddhismus gibt es verschiedene Arten von heiligen Gebäuden, zum
+            Beispiel <strong>Tempel</strong>, <strong>Pagoden</strong> und
+            <strong>Stupas</strong>. Diese Orte sind wichtig für Meditation,
+            Gebet und gemeinschaftliche Feiern.
+          </p>
+          <p>
+            In einem buddhistischen Tempel findet man häufig:
+          </p>
+          <ul>
+            <li>Eine Buddha-Statue oder mehrere Buddha-Bilder</li>
+            <li>Räucherstäbchen, Blumen und Opfergaben</li>
+            <li>Plätze zum Sitzen, Beten und Meditieren</li>
+          </ul>
+          <p>
+            Beim Betreten eines Tempels ziehen viele Menschen die Schuhe aus und
+            verhalten sich ruhig und respektvoll.
+          </p>
+        </div>
+        <div>
+          <img src="https://images.pexels.com/photos/208773/pexels-photo-208773.jpeg"
+               alt="Buddhistischer Tempel" />
+        </div>
+      </div>
+    </section>
 
-        <section id="kleidung">
-            <h2>Kleidung der Mönche und Nonnen</h2>
-            <p>Die traditionelle Robe (Kāṣāya) ist meist safranfarben, orange oder dunkelrot. Sie symbolisiert Einfachheit, Verzicht und Gleichheit aller Wesen.</p>
-            <div class="gallery">
-                <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Buddhistische Mönche">
-            </div>
-        </section>
+    <!-- Gottesbild -->
+    <section id="gottesbild">
+      <h3>Gottesbild – Vorstellungen von Buddha und dem Göttlichen</h3>
+      <div class="section-content">
+        <div class="section-text">
+          <p>
+            Der Buddhismus ist besonders, weil er oft nicht von einem
+            allmächtigen <strong>Gott</strong> spricht. Im Mittelpunkt steht
+            eher der <strong>Buddha</strong> als erleuchteter Lehrer.
+          </p>
+          <p>
+            Buddha wird nicht als Schöpfergott verstanden, sondern als Vorbild:
+          </p>
+          <ul>
+            <li>Ein Mensch, der Erleuchtung erreicht hat</li>
+            <li>Ein Lehrer, der den Weg aus dem Leiden zeigt</li>
+            <li>Symbol für Weisheit, Mitgefühl und inneren Frieden</li>
+          </ul>
+          <p>
+            In vielen Richtungen des Buddhismus gibt es außerdem Bodhisattvas –
+            Wesen, die anderen auf dem Weg zur Erleuchtung helfen.
+          </p>
+        </div>
+        <div>
+          <img src="https://images.pexels.com/photos/2908175/pexels-photo-2908175.jpeg"
+               alt="Buddha-Statue als Symbol für Erleuchtung" />
+        </div>
+      </div>
+    </section>
 
-        <section id="gotteshaus">
-            <h2>Buddhistische Tempel & Stupas</h2>
-            <p>Tempel (Vihāra), Pagoden und Stupas sind Orte der Meditation, Verehrung und Lehre. Viele sind reich verziert mit Gold, Statuen und Reliefs.</p>
-            <div class="gallery">
-                <img src="https://images.unsplash.com/photo-1564507592333-cb0e3a2b3c1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Goldener Tempel">
-                <img src="https://images.unsplash.com/photo-1560185893-a55f7b8b66b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Stupa">
-            </div>
-        </section>
+    <!-- Heilige Schrift -->
+    <section id="heilige-schrift">
+      <h3>Heilige Schrift – Texte im Buddhismus</h3>
+      <div class="section-content">
+        <div class="section-text">
+          <p>
+            Im Buddhismus gibt es nicht nur ein einziges heiliges Buch. Es
+            existieren viele Texte, die die Lehren Buddhas enthalten. Ein
+            bekannter Textsammlung ist der <strong>Pali-Kanon</strong>.
+          </p>
+          <p>
+            Heilige Schriften im Buddhismus enthalten:
+          </p>
+          <ul>
+            <li>Reden und Lehrtexte des Buddha</li>
+            <li>Regeln für Mönche und Nonnen</li>
+            <li>Geschichten, Gleichnisse und Philosophien</li>
+          </ul>
+          <p>
+            Die Texte werden oft studiert, rezitiert und in der Meditation
+            reflektiert, um die Lehre besser zu verstehen.
+          </p>
+        </div>
+        <div>
+          <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg"
+               alt="Buddhistische Texte und Schriftrollen" />
+        </div>
+      </div>
+    </section>
 
-        <section id="gottesbild">
-            <h2>Gottesbild im Buddhismus</h2>
-            <p>Im klassischen Buddhismus gibt es keinen Schöpfergott. Buddha wird nicht als Gott, sondern als Lehrer und Vorbild verehrt.</p>
-        </section>
+    <!-- Feste -->
+    <section id="feste">
+      <h3>Feste – Wichtige Tage im Buddhismus</h3>
+      <div class="section-content">
+        <div class="section-text">
+          <p>
+            Buddhistische Feste erinnern oft an wichtige Ereignisse im Leben
+            Buddhas oder feiern Werte wie Mitgefühl und Weisheit. Ein sehr
+            bekanntes Fest ist <strong>Vesakh</strong>.
+          </p>
+          <p>
+            Typische Merkmale buddhistischer Feste:
+          </p>
+          <ul>
+            <li>Besuch im Tempel und Gebete</li>
+            <li>Gemeinsame Meditationen und Gesänge</li>
+            <li>Lichter, Laternen und Opfergaben</li>
+          </ul>
+          <p>
+            Viele Buddhisten nutzen diese Tage, um Gutes zu tun, zum Beispiel
+            zu spenden oder anderen zu helfen.
+          </p>
+        </div>
+        <div>
+          <img src="https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg"
+               alt="Buddhistisches Fest mit Laternen" />
+        </div>
+      </div>
+    </section>
 
-        <section id="heiligeschrift">
-            <h2>Heilige Schriften</h2>
-            <p>Die wichtigste Sammlung ist der Tipiṭaka (Drei Körbe): Vinaya, Sutta und Abhidhamma. In Mahāyāna-Traditionen kommen noch viele Sutras hinzu.</p>
-        </section>
+    <!-- Rituale -->
+    <section id="rituale">
+      <h3>Rituale – Praktiken und Übungen</h3>
+      <div class="section-content">
+        <div class="section-text">
+          <p>
+            Rituale im Buddhismus sollen helfen, sich zu sammeln, ruhig zu
+            werden und sich an die Lehre zu erinnern. Sie können sehr einfach
+            oder feierlich sein.
+          </p>
+          <p>
+            Häufige Rituale sind:
+          </p>
+          <ul>
+            <li>Meditation im Sitzen oder Gehen</li>
+            <li>Rezitation von Mantras oder Sutren</li>
+            <li>Verneigungen vor dem Buddha-Bild</li>
+            <li>Das Anzünden von Kerzen und Räucherstäbchen</li>
+          </ul>
+          <p>
+            Rituale sind kein Zwang, sondern Hilfsmittel auf dem Weg zu mehr
+            Achtsamkeit und Mitgefühl.
+          </p>
+        </div>
+        <div>
+          <img src="https://images.pexels.com/photos/3759651/pexels-photo-3759651.jpeg"
+               alt="Meditierender Mensch in einem Ritual" />
+        </div>
+      </div>
+    </section>
 
-        <section id="feste">
-            <h2>Wichtige buddhistische Feste</h2>
-            <p>Vesak (Buddha Purnima) – Geburt, Erleuchtung und Tod des Buddha<br>Asalha Puja – erste Predigt<br>Ullambana – Totengedenken<br>Loi Krathong (Thailand) u.v.m.</p>
-        </section><section id="rituale">
-            <h2>Rituale & Praktiken</h2>
-            <p>Meditation (Samatha/Vipassanā), Rezitation von Sutras, Puja (Opfergaben), Umschreiten von Stupas, Mantra-Rezitation.</p>
-        </section>
+    <!-- Lebensregeln -->
+    <section id="lebensregeln">
+      <h3>Lebensregeln – Ethik im Buddhismus</h3>
+      <div class="section-content">
+        <div class="section-text">
+          <p>
+            Im Buddhismus gibt es wichtige ethische Regeln, die helfen, friedlich
+            und verantwortungsvoll zu leben. Für viele Laien sind die
+            <strong>Fünf Silas</strong> (fünf Regeln) grundlegend.
+          </p>
+          <p>
+            Typische Lebensregeln sind zum Beispiel:
+          </p>
+          <ul>
+            <li>Kein Lebewesen absichtlich verletzen oder töten</li>
+            <li>Nicht stehlen</li>
+            <li>Ehrlich sprechen, nicht lügen</li>
+            <li>Keinen schädlichen Umgang mit Sexualität</li>
+            <li>Keine berauschenden Mittel missbrauchen</li>
+          </ul>
+          <p>
+            Diese Regeln sollen nicht bestrafen, sondern helfen, Leid zu
+            verringern – bei sich selbst und bei anderen.
+          </p>
+        </div>
+        <div>
+          <img src="https://images.pexels.com/photos/1535244/pexels-photo-1535244.jpeg"
+               alt="Buddhistischer Mönch in Meditation, Symbol für Ethik" />
+        </div>
+      </div>
+    </section>
 
-        <section id="lebensregeln">
-            <h2>Die fünf Silas (Sittlichkeitsregeln)</h2>
-            <ol>
-                <li>Kein Lebewesen töten</li>
-                <li>Nicht stehlen</li>
-                <li>Kein sexuelles Fehlverhalten</li>
-                <li>Nicht lügen</li>
-                <li>Keine berauschenden Mittel</li>
-            </ol>
-            <p>Dazu kommt der Edle Achtfache Pfad.</p>
-        </section>
+    <!-- Symbole -->
+    <section id="symbole">
+      <h3>Symbole – Zeichen des Buddhismus</h3>
+      <div class="section-content">
+        <div class="section-text">
+          <p>
+            Im Buddhismus gibt es viele Symbole, die wichtige Ideen darstellen.
+            Sie erinnern an die Lehre und an den Weg zur Erleuchtung.
+          </p>
+          <p>
+            Einige bekannte Symbole sind:
+          </p>
+          <ul>
+            <li><strong>Dharma-Rad</strong> (Dharmachakra) – Symbol für die Lehre Buddhas</li>
+            <li><strong>Lotusblume</strong> – steht für Reinheit und Erwachen</li>
+            <li><strong>Buddha-Statue</strong> – erinnert an Erleuchtung und inneren Frieden</li>
+          </ul>
+          <p>
+            Diese Symbole findet man in Tempeln, auf Bildern, Schmuck oder
+            Gebetsfahnen.
+          </p>
+        </div>
+        <div>
+          <img src="https://images.pexels.com/photos/4158293/pexels-photo-4158293.jpeg"
+               alt="Buddhistische Symbole wie Dharma-Rad und Lotus" />
+        </div>
+      </div>
+    </section>
 
-        <section id="symbole">
-            <h2>Wichtige buddhistische Symbole</h2>
-            <p>Das Dharmachakra (Rad der Lehre), Lotusblüte, Bodhi-Baum, Acht Glückliche Symbole (Aṣṭamaṅgala), Om-Zeichen, Vajra u.a.</p>
-            
-            <div class="symbols-grid">
-                <div class="symbol-item">
-                    <img src="https://img.icons8.com/color/96/000000/dharma-wheel.png" alt="Dharmachakra"/>
-                    <span>Dharmachakra</span>
-                </div>
-                <div class="symbol-item">
-                    <img src="https://img.icons8.com/fluency/96/000000/lotus.png" alt="Lotus"/>
-                    <span>Lotus</span>
-                </div>
-                <div class="symbol-item">
-                    <img src="https://img.icons8.com/color/96/000000/om-symbol.png" alt="Om"/>
-                    <span>Om</span>
-                </div>
-                <div class="symbol-item">
-                    <img src="https://img.icons8.com/color/96/000000/infinity.png" alt="Unendlicher Knoten"/>
-                    <span>Unendlicher Knoten</span>
-                </div>
-            </div>
-        </section>
+    <!-- Quiz -->
+    <section id="quiz">
+      <h3>Quiz – Teste dein Wissen über den Buddhismus</h3>
+      <p style="font-size:0.9rem; margin-bottom:0.75rem;">
+        Beantworte die Fragen basierend auf den Informationen dieser Seite.
+      </p>
 
-        <section id="quiz">
-            <h2>Wissenstest – Wie gut kennst du den Buddhismus?</h2>
-            
-            <form id="quizForm">
-                <div class="quiz-question">
-                    <p>1. Wann lebte Siddhārtha Gautama ungefähr?</p>
-                    <label><input type="radio" name="q1" value="a"> 500 v. Chr.</label>
-                    <label><input type="radio" name="q1" value="b"> 500 n. Chr.</label>
-                    <label><input type="radio" name="q1" value="c"> 1500 n. Chr.</label>
-                </div>
+      <div class="question">
+        <p>1. Wer steht im Mittelpunkt des Buddhismus?</p>
+        <label>
+          <input type="radio" name="q1" value="a" />
+          Ein allmächtiger Schöpfergott
+        </label>
+        <label>
+          <input type="radio" name="q1" value="b" />
+          Buddha als erleuchteter Lehrer
+        </label>
+        <label>
+          <input type="radio" name="q1" value="c" />
+          Nur Tempelpriester
+        </label>
+      </div>
 
-                <div class="quiz-question">
-                    <p>2. Welche Farbe hat meist die Robe der Theravāda-Mönche?</p>
-                    <label><input type="radio" name="q2" value="a"> Schwarz</label>
-                    <label><input type="radio" name="q2" value="b"> Safran/Orange</label>
-                    <label><input type="radio" name="q2" value="c"> Weiß</label>
-                </div>
+      <div class="question">
+        <p>2. Wie heißt die traditionelle Kleidung buddhistischer Mönche?</p>
+        <label>
+          <input type="radio" name="q2" value="a" />
+          Anzug
+        </label>
+        <label>
+          <input type="radio" name="q2" value="b" />
+          Robe
+        </label>
+        <label>
+          <input type="radio" name="q2" value="c" />
+          Uniform
+        </label>
+      </div>
 
-                <div class="quiz-question">
-                    <p>3. Wie viele grundlegende Sittlichkeitsregeln (Silas) gibt es für Laien?</p>
-                    <label><input type="radio" name="q3" value="a"> 3</label>
-                    <label><input type="radio" name="q3" value="b"> 5</label>
-                    <label><input type="radio" name="q3" value="c"> 10</label>
-                </div>
+      <div class="question">
+        <p>3. Was ist ein wichtiger Zweck von Ritualen im Buddhismus?</p>
+        <label>
+          <input type="radio" name="q3" value="a" />
+          Mehr Luxus zu genießen
+        </label>
+        <label>
+          <input type="radio" name="q3" value="b" />
+          Sich zu sammeln und an die Lehre zu erinnern
+        </label>
+        <label>
+          <input type="radio" name="q3" value="c" />
+          Andere zu beeindrucken
+        </label>
+      </div>
 
-                <div class="quiz-question">
-                    <p>4. Was symbolisiert die Lotusblüte?</p>
-                    <label><input type="radio" name="q4" value="a"> Reichtum</label>
-                    <label><input type="radio" name="q4" value="b"> Reinheit & Erleuchtung</label>
-                    <label><input type="radio" name="q4" value="c"> Krieg</label>
-                </div>
+      <div class="question">
+        <p>4. Welche Aussage gehört zu den Lebensregeln?</p>
+        <label>
+          <input type="radio" name="q4" value="a" />
+          So viel wie möglich stehlen
+        </label>
+        <label>
+          <input type="radio" name="q4" value="b" />
+          Keinen berauschenden Mittel missbrauchen
+        </label>
+        <label>
+          <input type="radio" name="q4" value="c" />
+          Immer laut sprechen
+        </label>
+      </div>
 
-                <button type="button" onclick="checkAnswers()">Ergebnis anzeigen</button>
-            </form>
+      <div class="question">
+        <p>5. Was symbolisiert die Lotusblume im Buddhismus?</p>
+        <label>
+          <input type="radio" name="q5" value="a" />
+          Krieg und Stärke
+        </label>
+        <label>
+          <input type="radio" name="q5" value="b" />
+          Reinheit und Erwachen
+        </label>
+        <label>
+          <input type="radio" name="q5" value="c" />
+          Reichtum und Geld
+        </label>
+      </div>
 
-            <div id="quizResult" class="quiz-result"></div>
-        </section>
+      <div class="quiz-actions">
+        <button type="button" onclick="checkQuiz()">Quiz auswerten</button>
+        <button type="button" onclick="resetQuiz()" style="background:#777;">
+          Zurücksetzen
+        </button>
+        <span id="result"></span>
+      </div>
+    </section>
+  </main>
 
-    </main>
+  <footer>
+    © Buddhismus-Projekt – Vladyslav, Bruno, Ornela, Sofja, Mariela, Sara
+  </footer>
 
-    <footer>
-        <p>© 2025–2026 — Schulprojekt Buddhismus</p>
-    </footer>
+  <script>
+    function checkQuiz() {
+      const answers = {
+        q1: "b",
+        q2: "b",
+        q3: "b",
+        q4: "b",
+        q5: "b"
+      };
 
-    <script src="script.js"></script>
+      let score = 0;
+      let total = Object.keys(answers).length;
+
+      for (let key in answers) {
+        const selected = document.querySelector(
+          'input[name="' + key + '"]:checked'
+        );
+        if (selected && selected.value === answers[key]) {
+          score++;
+        }
+      }
+
+      const result = document.getElementById("result");
+      result.textContent =
+        "Du hast " + score + " von " + total + " Fragen richtig beantwortet.";
+    }
+
+    function resetQuiz() {
+      const inputs = document.querySelectorAll('#quiz input[type="radio"]');
+      inputs.forEach((input) => (input.checked = false));
+      document.getElementById("result").textContent = "";
+    }
+  </script>
 </body>
 </html>
